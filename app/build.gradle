@@ -1,0 +1,51 @@
+apply plugin: 'com.android.application'
+apply plugin: 'maven'
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion "21.1.2"
+
+    signingConfigs {
+        release {
+            storeFile file("peakgames.keystore")
+            storePassword "peakgames"
+            keyAlias "peakgames"
+            keyPassword "peakgames"
+        }
+    }
+
+    defaultConfig {
+        applicationId "net.peakgames.mobile.goalgame.android"
+        minSdkVersion 11
+        targetSdkVersion 21
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+        }
+    }
+
+}
+
+dependencies {
+    compile 'com.android.support:appcompat-v7:21.0.3'
+    compile 'net.peakgames.libgdx:stagebuilder-core:2.3.3'
+//    compile ('net.peakgames.mobile:android-gaming-lib:6.1.0-SNAPSHOT') {
+    compile (group: 'net.peakgames.mobile', name: 'android-gaming-lib', version: '6.1.0-SNAPSHOT', ext: 'jar') {
+        //exclude group: 'com.crashlytics.android'
+        //transitive = false
+    }
+    compile 'fr.avianey:facebook-android-api:3.18.0@aar'
+    compile 'com.squareup:otto:1.3.3'
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+task hello {
+    doLast {
+        println 'Hello world!'
+    }
+}
